@@ -17,8 +17,10 @@ These instructions will get you a copy of the project up and running on your loc
 Subnet Server can be downloaded directly as a pre-built binary from the releases page. Use the following `curl` command to download the latest release:
 
 ```bash
-curl -O [URL_TO_BINARY_RELEASE]
-chmod +x subnet_server
+curl -L -O https://github.com/myesterylabs/subnet-server/releases/download/v0.0.3/subnet-server-linux-amd64
+
+chmod +x subnet-server-linux-amd64
+```
 
 
 Running the Server

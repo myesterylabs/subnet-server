@@ -61,7 +61,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Execute the command with the arguments
-	var baseCommand = "node"
+	var baseCommand = "ipc-cli"
 	command := exec.Command(baseCommand, args.Args...)
 	output, err := command.CombinedOutput()
 	if err != nil {
