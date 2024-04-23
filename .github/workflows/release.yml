@@ -1,0 +1,67 @@
+name: Go Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.18'  # Use the Go version required by your project
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Get dependencies
+        run: go mod download
+      - name: Build binary for Linux
+        run: GOOS=linux GOARCH=amd64 go build -o myapp-linux-amd64
+      - name: Build binary for Windows
+        run: GOOS=windows GOARCH=amd64 go build -o myapp-windows-amd64.exe
+      - name: Build binary for macOS
+        run: GOOS=darwin GOARCH=amd64 go build -o myapp-darwin-amd64
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Linux Binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./myapp-linux-amd64
+          asset_name: myapp-linux-amd64
+          asset_content_type: application/octet-stream
+
+      - name: Upload Windows Binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./myapp-windows-amd64.exe
+          asset_name: myapp-windows-amd64.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload macOS Binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./myapp-darwin-amd64
+          asset_name: myapp-darwin-amd64
+          asset_content_type: application/octet-stream
