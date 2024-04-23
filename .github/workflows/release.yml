@@ -26,7 +26,7 @@ jobs:
       - name: Get dependencies
         run: go mod download
       - name: Build binary for Linux
-        run: GOOS=linux GOARCH=amd64 go build -o subnet-server-amd64
+        run: GOOS=linux GOARCH=amd64 go build -o subnet-server-linux-amd64
       - name: Build binary for Windows
         run: GOOS=windows GOARCH=amd64 go build -o subnet-server-amd64.exe
       - name: Build binary for macOS
@@ -49,7 +49,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./subnet-server-amd64
+          asset_path: ./subnet-server-linux-amd64
           asset_name: subnet-server-amd64
           asset_content_type: application/octet-stream
 
