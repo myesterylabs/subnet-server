@@ -1,10 +1,10 @@
 # Subnet Server
 
-Subnet Server is a lightweight, secure web server designed to execute `ilc-cli` commands and expose them through a RESTful API. It's ideal for integrating with other systems or providing a network-based interface to `ilc-cli` functionalities.
+Subnet Server is a lightweight, secure web server designed to execute `ipc-cli` commands and expose them through a RESTful API. It's ideal for integrating with other systems or providing a network-based interface to `ipc-cli` functionalities.
 
 ## Features
 
-- **Simple API**: Exposes `ilc-cli` commands through HTTP POST requests.
+- **Simple API**: Exposes `ipc-cli` commands through HTTP POST requests.
 - **Flexible Configuration**: Supports custom port and optional authorization token for enhanced security.
 - **Easy Deployment**: Quick to set up with minimal configuration, perfect for both development and production environments.
 
@@ -56,7 +56,7 @@ Contributions are welcome! For major changes, please open an issue first to disc
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 ### Acknowledgments
-Thanks to everyone who has contributed to developing ilc-cli.
+Thanks to everyone who has contributed to developing ipc-cli.
 Inspired by the needs of network administrators and automation enthusiasts.
 
 
